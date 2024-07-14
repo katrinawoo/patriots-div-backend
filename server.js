@@ -54,22 +54,6 @@ app.get('/api/positions/:id', async (req, res) => {
 
 app.use('/api', contactRoutes);
 
-// app.get('/api/team', (req, res) => {
-//   res.json(teamBios);
-// });
-
-// app.get('/api/positions', (req, res) => {
-//   res.json(openPositions);
-// });
-
-// app.get('/api/positions/:id', (req, res) => {
-//   const position = openPositions.find(pos => pos.id === parseInt(req.params.id));
-//   if (position) {
-//     res.json(position);
-//   } else {
-//     res.status(404).json({ message: "Position not found" });
-//   }
-// });
 
 //medium
 app.get('/', (req, res) => {
