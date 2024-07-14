@@ -1,14 +1,12 @@
 import cors from "cors";
 import dotenv from 'dotenv';
-// import initKnex from 'knex';
 import knex from "knex";
-// import configuration from './knexfile.js';
 import knexConfig from './knexfile.js'
 import express from "express";
-// import whRoutes from "./routes/warehouses.js";
-// import invRoutes from "./routes/inventory.js";
-import bodyParser from 'body-parser';
 import contactRoutes from './routes/contact_us.js';
+import jobApplicationRoutes from './routes/job_applications.js';
+import teamBiosRoutes from './routes/team_bios.js';
+import openPositionsRoutes from './routes/open_positions';
 import teamBios from "./seeds/01_team_bios.js";
 import openPositions from "./seeds/02_open_positions.js";
 
@@ -21,37 +19,35 @@ const db = knex(knexConfig);
 
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.json({ type: ['application/json'] }));
+app.use(express.urlencoded({ extended: true }));
 
 // Serve static files
 app.use('/assets', express.static('assets'));
+app.use('/uploads', express.static('uploads'));
 
-
-
-// app.use("/api/warehouses", whRoutes);
-// app.use("/api/inventories", invRoutes);
 
 // Routes
+// app.get('/api/team', async (req, res) => {
+//   const team = await db('team_bios').select('*');
+//   res.json(team);
+// });
 
-app.get('/api/team', async (req, res) => {
-  const team = await db('team_bios').select('*');
-  res.json(team);
-});
+// app.get('/api/positions', async (req, res) => {
+//   const positions = await db('open_positions').select('*');
+//   res.json(positions);
+// });
 
-app.get('/api/positions', async (req, res) => {
-  const positions = await db('open_positions').select('*');
-  res.json(positions);
-});
-
-app.get('/api/positions/:id', async (req, res) => {
-  const position = await db('open_positions').where('id', req.params.id).first();
-  if (position) {
-    res.json(position);
-  } else {
-    res.status(404).json({ message: "Position not found" });
-  }
-});
-
+// app.get('/api/positions/:id', async (req, res) => {
+//   const position = await db('open_positions').where('id', req.params.id).first();
+//   if (position) {
+//     res.json(position);
+//   } else {
+//     res.status(404).json({ message: "Position not found" });
+//   }
+// });
+app.use('/api/team', teamBiosRoutes);
+app.use('/api/positions', openPositionsRoutes);
+app.use('/api/job-applications', jobApplicationRoutes);
 app.use('/api', contactRoutes);
 
 
@@ -63,3 +59,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+export default db;
