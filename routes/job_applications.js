@@ -1,11 +1,11 @@
 import express from 'express';
-import upload from '../middlewares/upload';
-import db from '../server';
+import upload from '../middlewares/upload.js';
+import db from '../server.js';
 
 const router = express.Router();
 
 // Handle job application submission
-router.post('careers/:id/apply', upload.single('resume'), async (req, res) => {
+router.post('/careers/:id/apply', upload.single('resume'), async (req, res) => {
   const { id } = req.params;
   const { name, email, linkedin, links, information } = req.body;
   const resumePath = req.file ? req.file.path : null;
@@ -21,12 +21,13 @@ router.post('careers/:id/apply', upload.single('resume'), async (req, res) => {
       email,
       linkedin,
       links,
+      information,
       resume_path: resumePath,
-      information
     });
 
     res.status(201).json({ message: 'Job application submitted successfully' });
   } catch (error) {
+    console.error('Error inserting job application:', error);
     res.status(500).json({ error: 'Failed to submit job application' });
   }
 });

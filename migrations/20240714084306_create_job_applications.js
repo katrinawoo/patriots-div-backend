@@ -12,7 +12,6 @@ export function up(knex) {
       table.string('links').nullable();
       table.string('resume_path').notNullable();
       table.text('information').nullable();
-      table.integer('job_id').unsigned().notNullable();
       table.foreign('job_id').references('id').inTable('open_positions');
       table.timestamps(true, true);
     });

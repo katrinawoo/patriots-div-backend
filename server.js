@@ -6,7 +6,7 @@ import express from "express";
 import contactRoutes from './routes/contact_us.js';
 import jobApplicationRoutes from './routes/job_applications.js';
 import teamBiosRoutes from './routes/team_bios.js';
-import openPositionsRoutes from './routes/open_positions';
+import openPositionsRoutes from './routes/open_positions.js';
 import teamBios from "./seeds/01_team_bios.js";
 import openPositions from "./seeds/02_open_positions.js";
 
@@ -47,7 +47,7 @@ app.use('/uploads', express.static('uploads'));
 // });
 app.use('/api/team', teamBiosRoutes);
 app.use('/api/positions', openPositionsRoutes);
-app.use('/api/job-applications', jobApplicationRoutes);
+app.use('/api', jobApplicationRoutes);
 app.use('/api', contactRoutes);
 
 
