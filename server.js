@@ -8,6 +8,7 @@ import express from "express";
 // import whRoutes from "./routes/warehouses.js";
 // import invRoutes from "./routes/inventory.js";
 import bodyParser from 'body-parser';
+import contactRoutes from './routes/contact_us.js';
 import teamBios from "./seeds/01_team_bios.js";
 import openPositions from "./seeds/02_open_positions.js";
 
@@ -50,6 +51,8 @@ app.get('/api/positions/:id', async (req, res) => {
     res.status(404).json({ message: "Position not found" });
   }
 });
+
+app.use('/api', contactRoutes);
 
 // app.get('/api/team', (req, res) => {
 //   res.json(teamBios);
