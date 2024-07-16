@@ -7,8 +7,6 @@ import contactRoutes from './routes/contact_us.js';
 import jobApplicationRoutes from './routes/job_applications.js';
 import teamBiosRoutes from './routes/team_bios.js';
 import openPositionsRoutes from './routes/open_positions.js';
-// import teamBios from "./seeds/01_team_bios.js";
-// import openPositions from "./seeds/02_open_positions.js";
 
 
 dotenv.config();
