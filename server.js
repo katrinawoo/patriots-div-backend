@@ -7,8 +7,8 @@ import contactRoutes from './routes/contact_us.js';
 import jobApplicationRoutes from './routes/job_applications.js';
 import teamBiosRoutes from './routes/team_bios.js';
 import openPositionsRoutes from './routes/open_positions.js';
-import teamBios from "./seeds/01_team_bios.js";
-import openPositions from "./seeds/02_open_positions.js";
+// import teamBios from "./seeds/01_team_bios.js";
+// import openPositions from "./seeds/02_open_positions.js";
 
 
 dotenv.config();
@@ -27,34 +27,11 @@ app.use('/uploads', express.static('uploads'));
 
 
 // Routes
-// app.get('/api/team', async (req, res) => {
-//   const team = await db('team_bios').select('*');
-//   res.json(team);
-// });
-
-// app.get('/api/positions', async (req, res) => {
-//   const positions = await db('open_positions').select('*');
-//   res.json(positions);
-// });
-
-// app.get('/api/positions/:id', async (req, res) => {
-//   const position = await db('open_positions').where('id', req.params.id).first();
-//   if (position) {
-//     res.json(position);
-//   } else {
-//     res.status(404).json({ message: "Position not found" });
-//   }
-// });
 app.use('/api/team', teamBiosRoutes);
 app.use('/api/positions', openPositionsRoutes);
 app.use('/api', jobApplicationRoutes);
 app.use('/api', contactRoutes);
 
-
-//medium
-app.get('/', (req, res) => {
-    res.send('Welcome to my server!');
-  });
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
