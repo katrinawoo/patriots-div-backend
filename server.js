@@ -8,7 +8,6 @@ import jobApplicationRoutes from './routes/job_applications.js';
 import teamBiosRoutes from './routes/team_bios.js';
 import openPositionsRoutes from './routes/open_positions.js';
 
-
 dotenv.config();
 
 const app = express();
@@ -23,13 +22,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/assets', express.static('assets'));
 app.use('/uploads', express.static('uploads'));
 
-
 // Routes
 app.use('/api/team', teamBiosRoutes);
 app.use('/api/positions', openPositionsRoutes);
 app.use('/api', jobApplicationRoutes);
 app.use('/api', contactRoutes);
-
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
